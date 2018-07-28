@@ -1,0 +1,309 @@
+<html>
+ 
+<head>
+ 
+
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII"/>
+ 
+
+
+<!--  
+<script src="http://www.google.com/recaptcha/api.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+ -->
+ 
+<link rel="stylesheet" th:href="@{/resources/static/css/login_style.css}" />
+<script th:src="@{/resources/static/js/login.js}"></script>
+<script th:src="@{/resources/pwstrength.js}"></script>
+ 
+
+<title th:text="#{label.pages.home.title}">Title</title>
+ 
+	
+<script th:inline="javascript">
+/*<![CDATA[*/
+	function validate() {
+        if (document.f.username.value == "" && document.f.password.value == "") {
+            alert(/*[[#{message.username} + #{message.password}]]*/);
+            document.f.username.focus();
+            return false;
+        }
+        if (document.f.username.value == "") {
+            alert(/*[[#{message.username}]]*/);
+            document.f.username.focus();
+            return false;
+        }
+        if (document.f.password.value == "") {
+            alert(/*[[#{message.password}]]*/);
+            document.f.password.focus();
+            return false;
+        }
+    }
+    
+/*]]>*/ 
+</script>
+<style type="text/css">
+.wrapper{width:500px;margin-left:auto;margin-right:auto}
+label{padding-left:0 !important}
+</style>
+
+<script>
+
+
+</script>
+</head>
+
+<body>
+
+
+
+
+ <div class="container">
+        <div class="row">
+        
+			<div class="col-md-4 mx-auto" >
+			<!--  <center> <div style="font-size:50px;"><h1><img th:src="@{/resources/static/images/eth_logo_website.png}" style="height:30px;vertical-align: middle;"/><span style="color: #0000ff;"><span style="color: grey;"><strong>Skillometer</strong></span>&nbsp;&nbsp;<img th:src="@{/resources/static/images/skillometericon.png}" style="height:60px;vertical-align: bottom;"/></span></h1></div> </center>  -->			
+			<div id="first">
+				<div class="myform form ">
+					 <div class="logo mb-3">
+						 <div class="col-md-12 text-center">
+							<strong style="font-size: 20px;">SIGN IN</strong>
+						<!-- <a href="?lang=en" th:text="#{label.form.loginEnglish}">login</a> | 
+             				<a href="?lang=es_ES" th:text="#{label.form.loginSpanish}">login</a>   -->	
+						 </div>
+					</div>
+					  
+             
+            
+                   <form name='f' action="login" method='POST' onsubmit="return validate();" id="loginForm">
+                           <div class="form-group">
+                          <!--     <label for="exampleInputEmail1">Email address</label>  -->
+                              <input type="email" name='username'  class="form-control" id="email1" aria-describedby="emailHelp" placeholder="Email"/>
+                               <span id="userNameError" class="alert alert-danger row form-control" style="display:none"></span>
+                           </div>
+                           <div class="form-group">
+                           <!--    <label for="exampleInputEmail1">Password</label>  -->
+                              <input type="password" name="password" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Password"/>
+                              <span id="passwordError" class="alert alert-danger row form-control" style="display:none"></span>
+                              
+                           </div>
+                           
+                            
+                            <div class="form-group">
+                           
+                 			<input class="form-control" type='text' name='code' placeholder="Google Authenticator Verification Code"/> 
+                            </div>
+                           
+                           <div th:if="${param.message != null}" class="alert alert-info" th:text="${param.message[0]}" style="text-align:center">message</div>
+
+
+							<div th:if="${param.error != null}" class="alert alert-danger" th:text="${session[SPRING_SECURITY_LAST_EXCEPTION]}" style="text-align:center">error</div>
+                          
+                           <div class="col-md-12 text-center ">
+                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Sign In</button>
+                           </div>
+                           
+                           
+                           <div class="col-md-12 ">
+                              <div class="login-or">
+                                 <hr class="hr-or"/>
+                                 <span class="span-or">or</span>
+                              </div>
+                           </div>
+                           <div class="col-md-12 mb-3">
+                              <p class="text-center">
+                                 <a href="javascript:void();" class="google btn mybtn">
+                                <!--  <i class="fa fa-google-plus"></i>  -->
+                               Sign In using <img th:src="@{/resources/static/images/eth_logo_website.png}" style="height:20px;"/>
+                                  Digital Campus
+                                 </a>
+                              </p>
+                           </div>
+                           <div class="form-group">
+                               <p class="text-center">Don't have account? <a href="#" id="signup">Sign up here</a></p>
+                           </div>
+                        </form>
+                 
+				</div>
+			</div>
+			  <div id="second">
+			      <div class="myform form ">
+                        <div class="logo mb-3">
+                           <div class="col-md-12 text-center">
+                           <strong >SIGN UP</strong>
+                           </div>
+                        </div>
+                       
+                           <form action="/" method="POST" enctype="utf8" name="registration" id="registration">
+                           <div class="form-group">
+                            <!--   <label for="exampleInputEmail1">First Name</label> -->
+                              <input type="text"  name="firstName" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First Name" required="required"/>
+                               
+                              <span id="firstNameError" class="alert alert-danger row form-control" style="display:none"></span>
+                              
+                           </div>
+                           <div class="form-group">
+                             <!--  <label for="exampleInputEmail1">Last Name</label> -->
+                              <input type="text"  name="lastName" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Last Name" required="required"/>
+                               <span id="lastNameError" class="alert alert-danger row form-control" style="display:none"></span>
+                           </div>
+                           <div class="form-group">
+                             <!--   <label for="exampleInputEmail1">Email address</label> -->
+                              <input type="email" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" required="required"/>
+                               <span id="emailError" class="alert alert-danger row form-control" style="display:none"></span>
+                           </div>
+                           
+                           
+                           <div class="form-group">
+                            <!--   <label for="exampleInputEmail1">Password</label> -->
+                              <input type="password" id="passwordR" class="form-control" name="password"  aria-describedby="emailHelp" placeholder="Enter Password" required="required"/>
+                                <span id="passwordError" class="alert alert-danger row form-control" style="display:none"></span>
+                           </div>
+                           
+                            <div class="form-group">
+			                  <!--   <label class="col-sm-3" th:text="#{label.user.confirmPass}">confirm</label> -->
+			                     <input id="matchPassword" class="form-control" name="matchingPassword" value="" type="password" required="required" placeholder="Re-Enter Password" />
+			                    <span id="globalError" class="alert alert-danger row form-control" style="display:none;margin-left: 1;padding:1;"></span>
+			                    
+			                </div>
+                           
+                             <div class="form-group text-center">
+                             	 <input type="checkbox" name="using2FA" value="true"/>
+			                     <label  th:text="#{label.user.2fa}">Use Two Step Verification</label>
+			                </div>
+                			<div class="form-group">
+                              <p class="text-center">By signing up you accept our <a href="#">Terms Of Use</a></p>
+                          </div>
+                           <div class="form-group">
+			                    <!-- to enable captcha uncomment the keys in application.properties -->
+			                   <!--  <label class="col-sm-3">Captcha</label>  -->
+			                    <div class="g-recaptcha col-sm-5" th:attr="data-sitekey=${@captchaService.getReCaptchaSite()}" data-callback="onReCaptchaSuccess" data-expired-callback="onReCaptchaExpired"></div>
+			                    <span id="captchaError" class="alert alert-danger col-sm-4" style="display:none"></span>
+			                </div>
+			              
+                          
+                           <div class="col-md-12 text-center mb-3">
+                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Get Started</button>
+                              
+                           </div>
+                             
+                           
+                           <div class="col-md-12 ">
+                              <div class="form-group">
+                                 <p class="text-center"><a href="#" id="signin">Already have an account?</a></p>
+                              </div>
+                           </div>
+                           
+                        </form>
+                     </div>
+			</div>
+		</div>
+      </div>   
+       </div>  
+       
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+var serverContext = [[@{/}]];
+
+$(document).ready(function () {
+	$('#registration').submit(function(event) {
+		register(event);
+	});
+	
+	$("#passwordR").keyup(function(){
+		
+		if($("#passwordR").val() != $("#matchPassword").val()){
+	        $("#globalError").show().html(/*[[#{PasswordMatches.user}]]*/);
+	    }else{
+	    	$("#globalError").html("").hide();
+	    }
+	});
+	
+	options = {
+		    common: {minChar:8},
+		    ui: {
+		    	showVerdictsInsideProgressBar:true,
+		    	showErrors:true,
+		    	errorMessages:{
+		    		  wordLength: /*[[#{error.wordLength}]]*/,
+		    		  wordNotEmail: /*[[#{error.wordNotEmail}]]*/,
+		    		  wordSequences: /*[[#{error.wordSequences}]]*/,
+		    		  wordLowercase: /*[[#{error.wordLowercase}]]*/,
+		    		  wordUppercase: /*[[#{error.wordUppercase}]]*/,
+		    	      wordOneNumber: /*[[#{error.wordOneNumber}]]*/,
+		    		  wordOneSpecialChar: /*[[#{error.wordOneSpecialChar}]]*/'
+		    		}
+		    	}
+		};
+	 $('#passwordR').pwstrength(options);
+});
+
+function register(event){
+	event.preventDefault();
+    $(".alert").html("").hide();
+    $(".error-list").html("");
+    if($("#passwordR").val() != $("#matchPassword").val()){
+    	$("#globalError").show().html(/*[[#{PasswordMatches.user}]]*/);
+    	return;
+    }
+    if (typeof grecaptcha !== 'undefined') {
+        var resp = grecaptcha.getResponse();
+        if (resp.length == 0) {
+            $("#captchaError").show().html("Please verify that you are not a robot.");
+            return;
+        }
+    }
+    var formData= $('#registration').serialize();
+    
+    $.post(serverContext + "user/registrationCaptcha",formData ,function(data){
+    	alert(data.message);
+        if(data.message == "success"){
+            window.location.href = serverContext + "successRegister.html";
+        }
+        
+    })
+    .fail(function(data) {
+        grecaptcha.reset();
+
+        if(data.responseJSON.error.indexOf("MailError") > -1)
+        {
+            window.location.href = serverContext + "emailError.html";
+        }
+        else if(data.responseJSON.error == "InvalidReCaptcha"){
+            $("#captchaError").show().html(data.responseJSON.message);
+        }
+        else if(data.responseJSON.error == "UserAlreadyExist"){
+            $("#emailError").show().html(data.responseJSON.message);
+        }
+        else if(data.responseJSON.error.indexOf("InternalError") > -1){
+            window.location.href = serverContext + "login?message=" + data.responseJSON.message;
+        }
+        else{
+        	var errors = $.parseJSON(data.responseJSON.message);
+            $.each( errors, function( index,item ){
+                $("#"+item.field+"Error").show().html(item.defaultMessage);
+            });
+            errors = $.parseJSON(data.responseJSON.error);
+            $.each( errors, function( index,item ){
+                $("#globalError").show().append(item.defaultMessage+"<br/>");
+            });
+        }
+    });
+}
+/*]]>*/
+
+var onReCaptchaSuccess = function(response) {
+    $("#captchaError").html("").hide();
+};
+
+var onReCaptchaExpired = function(response) {
+    $("#captchaError").html("reCaptcha has expired.  Please solve a new reCaptcha").show();
+    grecaptcha.reset();
+};
+</script>        
+</body>
+
+</html>
